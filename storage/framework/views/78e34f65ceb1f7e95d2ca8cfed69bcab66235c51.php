@@ -104,7 +104,7 @@
                             <h5><i class="mdi mdi-arrow-right text-primary"></i> Data Diri</h5>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="validationCustom01" class="form-label">NIK</label>
                                     <input data-inputmask="'alias': 'numeric'" class="form-control input-mask text-start" id="nik" placeholder="NIK"
@@ -114,11 +114,21 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                                 <div class="mb-3">
                                     <label for="validationCustom01" class="form-label">Nomor Telepon/WhatsApp</label>
                                     <input type="text" class="form-control" id="nomor_telepon"
-                                        placeholder="nomor_telepon" name="nomor_telepon" required>
+                                        placeholder="Nomor Telepon" name="nomor_telepon" required>
+                                    <div class="valid-feedback">
+                                        Benar!
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="mb-3">
+                                    <label for="validationCustom01" class="form-label">Nomor Telepon/WhatsApp</label>
+                                    <input type="email" class="form-control" id="email"
+                                        placeholder="email" name="email" required>
                                     <div class="valid-feedback">
                                         Benar!
                                     </div>

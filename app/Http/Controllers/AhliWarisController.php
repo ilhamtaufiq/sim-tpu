@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\AhliWaris;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use DataTables;
 
 class AhliWarisController extends Controller
@@ -115,8 +117,19 @@ class AhliWarisController extends Controller
             'alamat' => $request->alamat,
             'agama' => $request->agama,
             'nomor_telepon' => $request->nomor_telepon,
-        ]); 
+        ]);
+        $user = User::create([
+            'name' => $request->nama,
+            'dob'=> $request->tanggal_lahir,
+            'email' => $request->email,
+            'password' => Hash::make('password'),
+            'email_verified_at'=> now(),
+            'avatar' => 'assets/images/pemda.png',
+            'created_at' => now(),
+        ]);
+
         return Response()->json($ahliWaris);
+        
     }
 
     /**

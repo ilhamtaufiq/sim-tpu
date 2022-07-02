@@ -56,7 +56,8 @@ class HomeController extends Controller
             ->groupBy('label')
             ->pluck('label');
         //Persentase kenaikan (%) = (( akhir-awal ))/awal x 100%
-        $persentase  = ($tahun-$subTahun) / $subTahun*100;
+        $perbandingan = $tahun-$subTahun;
+        $persentase  = divnum($perbandingan, $subTahun)*100;
         return view('index',compact('jumlah_registrasi','tahun','data','subTahun','persentase','bulan','label_bulan'));
     }
 

@@ -151,7 +151,6 @@ class RegistrasiController extends Controller
         );
     
         $valid = $this->validate($request, $rules, $customMessages, $attributeNames);
-
         $registrasi = Registrasi::updateOrCreate(
             [
                 'id' => $regId,
@@ -173,8 +172,10 @@ class RegistrasiController extends Controller
             'registrasi_id' => $registrasi->id,
         ],
         [
-            'nominal' => 90000
+            'nominal' => 40000
         ]);
+
+
 
         return Response()->json($registrasi);
         // return back()->with('pesan','Data Berhasil Ditambahkan');

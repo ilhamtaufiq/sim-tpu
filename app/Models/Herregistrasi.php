@@ -11,7 +11,7 @@ class Herregistrasi extends Model
     protected $table = 'db_herregistrasi';
     protected $fillable = [
         'registrasi_id',
-        'status'
+        'nominal'
     ];
 
     /**
