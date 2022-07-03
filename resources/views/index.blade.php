@@ -58,9 +58,16 @@
                 </div>
             </div>
         </div>
+        <div class="col-lg-12">
+            <div class="card">
+                <div class="card-body">
+                    <p>Tidak Ada Tagihan</p>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- end row -->
-
+    @role('admin')
     <div class="row">
         <div class="col-xl-12">
             <div class="row">
@@ -143,18 +150,14 @@
                 <div class="card-body">
                     <div class="clearfix">
                         <h4 class="card-title mb-4">Pendapatan</h4>
-                        <p>
-                            {{ json_encode($bulan) }}
-                        </p>
                     </div>
-
                     <div class="row">
                         <div class="col-lg-12">
                             <div id=myDIV>
+                                <button class="btns btn active" onclick="changeData(0)">2022</button>
+                                <button class="btns btn" onclick="changeData(1)">2021</button>
+                                <button class="btns btn" onclick="changeData(2)">2020</button>
                                 <canvas id="chart-0"></canvas>
-                                <button class="btns btn active" onclick="changeData(0)">Datasets 1</button>
-                                <button class="btns btn" onclick="changeData(1)">Datasets 2</button>
-                                <button class="btns btn" onclick="changeData(2)">Datasets 3</button>
                             </div>
                         </div>
                     </div>
@@ -162,6 +165,7 @@
             </div>
         </div>
     </div>
+    @endrole
     <!-- end row -->
     <!-- end row -->
     {{-- var sites = @json($bulan->toArray()); --}}

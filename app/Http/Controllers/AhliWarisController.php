@@ -46,7 +46,6 @@ class AhliWarisController extends Controller
                         <a class="dropdown-item" href="javascript:void(0)" onclick="update('.$ahliWaris->id.')">Ubah</a>
                         <a class="dropdown-item btn-hapus" href="javascript:void(0)" onclick="hapus('.$ahliWaris->id.')">Hapus</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/registrasi/inv/'.$ahliWaris->id.'">SKRD</a>
                     </div>
                 </div>';
                     return $actionBtn;
@@ -104,20 +103,6 @@ class AhliWarisController extends Controller
     
         $valid = $this->validate($request, $rules, $customMessages, $attributeNames);
 
-
-        $ahliWaris = AhliWaris::updateOrCreate(
-            [
-                'id' => $regId,
-            ],
-            [
-            'nama' => $request->nama,
-            'nik' => $request->nik,
-            'tempat_lahir' => $request->tempat_lahir,
-            'tanggal_lahir' => $request->tanggal_lahir,
-            'alamat' => $request->alamat,
-            'agama' => $request->agama,
-            'nomor_telepon' => $request->nomor_telepon,
-        ]);
         $user = User::create([
             'name' => $request->nama,
             'dob'=> $request->tanggal_lahir,
@@ -128,6 +113,20 @@ class AhliWarisController extends Controller
             'created_at' => now(),
         ]);
 
+        $ahliWaris = AhliWaris::updateOrCreate(
+            [
+                'id' => $regId,
+            ],
+            [
+            'user_id' => $user->id,
+            'nama' => $request->nama,
+            'nik' => $request->nik,
+            'tempat_lahir' => $request->tempat_lahir,
+            'tanggal_lahir' => $request->tanggal_lahir,
+            'alamat' => $request->alamat,
+            'agama' => $request->agama,
+            'nomor_telepon' => $request->nomor_telepon,
+        ]);
         return Response()->json($ahliWaris);
         
     }

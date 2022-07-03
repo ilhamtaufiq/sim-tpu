@@ -15,8 +15,8 @@
                         <span key="t-starter-page">Dashboard</span>
                     </a>
                 </li>
+                @role('admin')
                 <li class="menu-title" key="t-menu">Halaman</li>
-
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">
                         <span class="badge rounded-pill bg-success float-end"
@@ -44,6 +44,7 @@
 
                     </ul>
                 </li>
+                @endrole
                 {{-- <li>
                     <a href="javascript: void(0);" class="has-arrow waves-effect">
                         <i class="bx bx-share-alt"></i>

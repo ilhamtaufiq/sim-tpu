@@ -15,8 +15,8 @@
                         <span key="t-starter-page">Dashboard</span>
                     </a>
                 </li>
+                <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
                 <li class="menu-title" key="t-menu">Halaman</li>
-
                 <li>
                     <a href="javascript: void(0);" class="waves-effect">
                         <span class="badge rounded-pill bg-success float-end"
@@ -44,6 +44,7 @@
 
                     </ul>
                 </li>
+                <?php endif; ?>
                 
 
             </ul>

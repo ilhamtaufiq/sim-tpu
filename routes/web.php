@@ -2,6 +2,11 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
+use App\Http\Controllers\PermissionsController;
+use App\Http\Controllers\RolesController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -18,9 +23,14 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('root');
 
+
 //Update User Details
 Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
 Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
+
+Route::resource('users', UsersController::class);
+Route::resource('roles', RolesController::class);
+Route::resource('permissions', PermissionsController::class);
 
 // Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 

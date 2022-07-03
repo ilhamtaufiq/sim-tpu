@@ -1,5 +1,5 @@
 <?php $__env->startSection('title'); ?>
-    SKRD Herregistrasi
+    Daftar Pengguna
 <?php $__env->stopSection(); ?>
 <link href="<?php echo e(asset('/assets/libs/datatables/datatables.min.css')); ?>" rel="stylesheet" type="text/css" />
 <?php $__env->startSection('css'); ?>
@@ -8,10 +8,10 @@
 <?php $__env->startSection('content'); ?>
     <?php $__env->startComponent('components.breadcrumb'); ?>
         <?php $__env->slot('li_1'); ?>
-            SKRD
+            Pengguna
         <?php $__env->endSlot(); ?>
         <?php $__env->slot('title'); ?>
-            Herregistrasi
+            Daftar Pengguna
         <?php $__env->endSlot(); ?>
     <?php echo $__env->renderComponent(); ?>
     <div class="row">
@@ -22,11 +22,8 @@
                         <thead>
                             <tr>
                                 <th>No</th>
-                                <th>Kode Registrasi</th>
-                                <th>Nama Ahliwaris</th>
-                                
-                                <th>Nama Makam</th>
-                                <th>Nominal</th>
+                                <th>Nama</th>
+                                <th>Email</th>
                                 <th>Detail</th>
                             </tr>
                         </thead>
@@ -34,20 +31,13 @@
                             <?php
                                 $i = 1;
                             ?>
-                            <?php $__currentLoopData = $data; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                            <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <td><?php echo e($i++); ?></td>
-                                    <td><?php echo e($item->registrasi->kode_registrasi); ?></td>
-                                    <td><?php echo e($item->registrasi->ahliwaris->nama); ?></td>
-                                    
-                                    <td><?php echo e($item->registrasi->nama_meninggal); ?></td>
-                                    <td><?php echo e($item->nominal); ?></td>
+                                    <td><?php echo e($item->nama); ?></td>
+                                    <td><?php echo e($item->email); ?></td>
                                     <td>
-                                        <button onclick="inv(<?php echo e($item->id); ?>)" type="button"
-                                            class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">
-                                            Lihat
-                                        </button>
-                                        <a href="/pembayaran/herregistrasi/detail?id=<?php echo e($item->id); ?>">Bayar</a>
+                                       Opsi
                                     </td>
                                 </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
@@ -109,4 +99,4 @@
     </script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/ilhamtaufiq/www/Admin/resources/views/pages/pembayaran/herregistrasi.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH /Users/ilhamtaufiq/www/Admin/resources/views/admin/users/index.blade.php ENDPATH**/ ?>

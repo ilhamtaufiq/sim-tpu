@@ -10,6 +10,7 @@ class AhliWaris extends Model
     use HasFactory;
     protected $table = 'db_ahliwaris';
     protected $fillable = [
+        'user_id',
         'nama',
         'nik',
         'tempat_lahir',

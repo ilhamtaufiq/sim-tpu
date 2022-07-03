@@ -126,7 +126,7 @@
                             </div>
                             <div class="col-md-4">
                                 <div class="mb-3">
-                                    <label for="validationCustom01" class="form-label">Nomor Telepon/WhatsApp</label>
+                                    <label for="validationCustom01" class="form-label">Alamat Email</label>
                                     <input type="email" class="form-control" id="email"
                                         placeholder="email" name="email" required>
                                     <div class="valid-feedback">
