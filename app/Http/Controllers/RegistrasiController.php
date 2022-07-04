@@ -67,8 +67,7 @@ class RegistrasiController extends Controller
                         <a class="dropdown-item" href="javascript:void(0)" onclick="update('.$registrasi->id.')">Ubah</a>
                         <a class="dropdown-item btn-hapus" href="javascript:void(0)" onclick="hapus('.$registrasi->id.')">Hapus</a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/registrasi/inv/'.$registrasi->id.'">SKRD</a>
-                        <a class="dropdown-item" href="/registrasi/detail?'.$registrasi->id.'">Detail</a>
+                        <a class="dropdown-item" href="/registrasi/detail?id='.$registrasi->id.'">Detail</a>
                     </div>
                     </div>';
                     return $actionBtn;
@@ -180,7 +179,7 @@ class RegistrasiController extends Controller
         ]);
         $order = Order::updateOrCreate([
             'registrasi_id' => $registrasi->id,
-            'number' => $kodeReg,
+            'number' => 'DPKP-'.rand(0000,9999),
 
         ],
         [
@@ -233,32 +232,6 @@ class RegistrasiController extends Controller
         return Response()->json($registrasi);
     }
 
-    public function inv(Request $request)
-    {
-        $data = Registrasi::with('ahliwaris')->where('id', $request->id)->first();
-        $bayar = $data->retribusi+$data->ambulance;
-            Config::$serverKey = config('services.midtrans.server_key');
-            Config::$isProduction = config('services.midtrans.is_production');
-            Config::$isSanitized = config('services.midtrans.is_sanitized');
-            Config::$is3ds = config('services.midtrans.is_3ds');
-            
-            $params = array(
-                'transaction_details' => array(
-                    'order_id' => rand(),
-                    'gross_amount' => $bayar,
-                ),
-                'customer_details' => array(
-                    'first_name' => $data->ahliwaris->nama,
-                    'last_name' => '',
-                    'email' => 'ilhamtaufiq@gmail.com',
-                    'phone' => '6285217795994',
-                ),
-            );
-            
-        $snap_token = \Midtrans\Snap::getSnapToken($params);
-        return view('pages.inv.index',compact('data','snap_token'));
-    }   
-
     /**
      * Remove the specified resource from storage.
      *
@@ -286,7 +259,7 @@ class RegistrasiController extends Controller
 
     public function detail(Request $request)
     {
-        $data = Registrasi::where('id', $request->id)->first();
+        $data = Registrasi::with('ahliwaris','tpu','order')->where('id', $request->id)->first();
         return view('pages.makam.detail', compact('data'));
     }
 }

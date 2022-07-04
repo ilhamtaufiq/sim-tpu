@@ -51,7 +51,7 @@
 
                                 <div class="d-flex flex-column h-100">
                                     <div class="mb-4 mb-md-5">
-                                        <a href="index" class="d-block auth-logo">
+                                        <a href="/" class="d-block auth-logo">
                                             <img src="{{ asset('/assets/images/pemda.png') }}" alt=""
                                                 height="75" class="auth-logo-dark">
                                             <img src="{{ asset('/assets/images/pemda.png') }}" alt=""

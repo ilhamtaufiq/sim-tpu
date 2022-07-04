@@ -49,7 +49,7 @@
                                             class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">
                                             Lihat
                                         </button>
-                                        <a href="/pembayaran/herregistrasi/detail?id={{$item->id}}">Bayar</a>
+                                        {{-- <a href="/pembayaran/herregistrasi/detail?id={{$item->id}}">Bayar</a> --}}
                                     </td>
                                 </tr>
                             @endforeach

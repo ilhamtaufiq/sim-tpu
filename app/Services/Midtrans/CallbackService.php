@@ -3,6 +3,8 @@
 namespace App\Services\Midtrans;
  
 use App\Models\Order;
+use App\Models\Herregistrasi;
+
 use App\Services\Midtrans\Midtrans;
 use Midtrans\Notification;
  

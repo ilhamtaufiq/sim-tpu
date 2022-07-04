@@ -15,7 +15,8 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::all();
+        $orders = Order::with('registrasi.ahliwaris')->get();
+        // dd($orders);
 
         return view('orders.index', compact('orders'));
     }

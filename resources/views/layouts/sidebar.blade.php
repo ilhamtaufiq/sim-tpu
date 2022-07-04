@@ -36,11 +36,23 @@
                         <span class="badge rounded-pill bg-success float-end"
                             key="t-new">@lang('translation.New')</span>
                         <i class="bx bx-user-circle"></i>
-                        <span key="t-authentication">SKRD</span>
+                        <span key="t-authentication">Rekap</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="{{route('pembayaran')}}">Registrasi</a></li>
                         <li><a href="{{route('herregistrasi')}}">Herregistrasi</a></li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="waves-effect">
+                        <span class="badge rounded-pill bg-success float-end"
+                            key="t-new">@lang('translation.New')</span>
+                        <i class="bx bx-user-circle"></i>
+                        <span key="t-authentication">Pembayaran</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="{{url('orders')}}">Status Pembayaran</a></li>
 
                     </ul>
                 </li>

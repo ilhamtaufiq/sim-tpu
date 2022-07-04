@@ -19,15 +19,20 @@
                 <div class="card-body">
                     <table class="table table-hover table-condensed">
                         <thead class="thead-light">
-                            <th scope="col">#</th>
+                            <th scope="col">Kode Pembayaran</th>
+                            <th>Ahli Waris</th>
                             <th scope="col">Total Harga</th>
                             <th scope="col">Status Pembayaran</th>
+                            <th>Tahun Herregistrasi</th>
                             <th scope="col"></th>
                         </thead>
                         <tbody>
                             <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <td>#<?php echo e($order->number); ?></td>
+                                    <?php $__currentLoopData = $order->registrasi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <th><?php echo e($item->ahliwaris->nama); ?></th>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <td><?php echo e(number_format($order->total_price, 2, ',', '.')); ?></td>
                                     <td>
                                         <?php if($order->payment_status == 1): ?>
@@ -38,6 +43,9 @@
                                             Kadaluarsa
                                         <?php endif; ?>
                                     </td>
+                                    <?php $__currentLoopData = $order->registrasi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <th><?php echo e($tahun = \Carbon\Carbon::parse($item->tanggal_meninggal)->addYear(2)->format('Y')); ?></th>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <td>
                                         <a href="<?php echo e(route('orders.show', $order->id)); ?>" class="btn btn-success">
                                             Lihat

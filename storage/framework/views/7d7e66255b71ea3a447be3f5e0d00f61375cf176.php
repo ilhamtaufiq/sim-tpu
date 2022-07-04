@@ -47,7 +47,7 @@
                                             class="btn btn-primary btn-sm btn-rounded waves-effect waves-light">
                                             Lihat
                                         </button>
-                                        <a href="/pembayaran/herregistrasi/detail?id=<?php echo e($item->id); ?>">Bayar</a>
+                                        
                                     </td>
                                 </tr>
                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

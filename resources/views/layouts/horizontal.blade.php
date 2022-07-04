@@ -3,7 +3,7 @@
         <div class="d-flex">
             <!-- LOGO -->
             <div class="navbar-brand-box">
-                <a href="index" class="logo logo-dark">
+                <a href="/" class="logo logo-dark">
                     <span class="logo-sm">
                         <img src="{{ asset ('/assets/images/logo.svg') }}" alt="" height="22">
                     </span>
@@ -12,7 +12,7 @@
                     </span>
                 </a>
 
-                <a href="index" class="logo logo-light">
+                <a href="/" class="logo logo-light">
                     <span class="logo-sm">
                         <img src="{{ asset ('/assets/images/logo-light.svg') }}" alt="" height="22">
                     </span>
@@ -427,7 +427,7 @@
                         </a>
                         <div class="dropdown-menu" aria-labelledby="topnav-dashboard">
 
-                            <a href="index" class="dropdown-item" key="t-default">@lang('translation.Default')</a>
+                            <a href="/" class="dropdown-item" key="t-default">@lang('translation.Default')</a>
                             <a href="dashboard-saas" class="dropdown-item" key="t-saas">@lang('translation.Saas')</a>
                             <a href="dashboard-crypto" class="dropdown-item" key="t-crypto">@lang('translation.Crypto')</a>
                             <a href="dashboard-blog" class="dropdown-item" key="t-blog">@lang('translation.Blog')</a>

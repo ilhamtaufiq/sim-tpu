@@ -21,15 +21,20 @@
                 <div class="card-body">
                     <table class="table table-hover table-condensed">
                         <thead class="thead-light">
-                            <th scope="col">#</th>
+                            <th scope="col">Kode Pembayaran</th>
+                            <th>Ahli Waris</th>
                             <th scope="col">Total Harga</th>
                             <th scope="col">Status Pembayaran</th>
+                            <th>Tahun Herregistrasi</th>
                             <th scope="col"></th>
                         </thead>
                         <tbody>
                             @foreach ($orders as $order)
                                 <tr>
                                     <td>#{{ $order->number }}</td>
+                                    @foreach ($order->registrasi as $item)
+                                    <th>{{$item->ahliwaris->nama}}</th>
+                                    @endforeach
                                     <td>{{ number_format($order->total_price, 2, ',', '.') }}</td>
                                     <td>
                                         @if ($order->payment_status == 1)
@@ -40,6 +45,9 @@
                                             Kadaluarsa
                                         @endif
                                     </td>
+                                    @foreach ($order->registrasi as $item)
+                                    <th>{{$tahun = \Carbon\Carbon::parse($item->tanggal_meninggal)->addYear(2)->format('Y')}}</th>
+                                    @endforeach
                                     <td>
                                         <a href="{{ route('orders.show', $order->id) }}" class="btn btn-success">
                                             Lihat

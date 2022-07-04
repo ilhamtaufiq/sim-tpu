@@ -43,4 +43,25 @@ class Registrasi extends Model
     {
         return $this->hasOne(AhliWaris::class, 'id', 'id_ahliwaris');
     }
+
+    /**
+     * Get the user associated with the Registrasi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function tpu()
+    {
+        return $this->hasOne(TPU::class, 'kode_tpu', 'nama_tpu');
+    }
+    
+    /**
+     * Get the order associated with the Registrasi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function order()
+    {
+        return $this->hasOne(Order::class, 'registrasi_id', 'id');
+    }
+    
 }

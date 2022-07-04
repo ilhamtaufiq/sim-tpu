@@ -3,6 +3,7 @@
 namespace App\Services\Midtrans;
  
 use Midtrans\Snap;
+use App\Models\Order;
  
 class CreateSnapTokenService extends Midtrans
 {
@@ -16,18 +17,23 @@ class CreateSnapTokenService extends Midtrans
     }
  
     public function getSnapToken()
-    {
-        $params = [
-            'transaction_details' => [
-                'order_id' => $this->order->number,
-                'gross_amount' => $this->order->total_price,
-            ],
-            'customer_details' => [
-                'first_name' => 'Ilham Taufik',
-                'email' => 'ilhamtaufiq@gmail.com',
-                'phone' => '085217795994',
-            ]
-        ];
+    {   
+        $id = $this->order->id;  
+        $data = Order::with('registrasi.ahliwaris')->where('id', $id)->first();
+        foreach ($data->registrasi as $value) {
+            # code...
+            $params = [
+                'transaction_details' => [
+                    'order_id' => $this->order->number,
+                    'gross_amount' => $this->order->total_price,
+                ],
+                'custom_field1' => [
+                    'first_name' => $value->ahliwaris->nama,
+                    'email' => $value->ahliwaris->email,
+                    'phone' => $value->ahliwaris->no_telepon,
+                ]
+            ];
+        }        
  
         $snapToken = Snap::getSnapToken($params);
  

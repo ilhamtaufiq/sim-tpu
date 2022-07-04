@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Order;
 use App\Models\Registrasi;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
@@ -38,6 +39,7 @@ class HomeController extends Controller
 
     public function root()
     {
+        $orders = Order::get();
         $data = Registrasi::get();
         $jumlah_registrasi = $data->count();
         $now = Carbon::now();
@@ -58,7 +60,7 @@ class HomeController extends Controller
         //Persentase kenaikan (%) = (( akhir-awal ))/awal x 100%
         $perbandingan = $tahun-$subTahun;
         $persentase  = divnum($perbandingan, $subTahun)*100;
-        return view('index',compact('jumlah_registrasi','tahun','data','subTahun','persentase','bulan','label_bulan'));
+        return view('index',compact('jumlah_registrasi','tahun','data','subTahun','persentase','bulan','label_bulan','orders'));
     }
 
     /*Language Translation*/

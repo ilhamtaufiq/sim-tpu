@@ -36,11 +36,23 @@
                         <span class="badge rounded-pill bg-success float-end"
                             key="t-new"><?php echo app('translator')->get('translation.New'); ?></span>
                         <i class="bx bx-user-circle"></i>
-                        <span key="t-authentication">SKRD</span>
+                        <span key="t-authentication">Rekap</span>
                     </a>
                     <ul class="sub-menu" aria-expanded="false">
                         <li><a href="<?php echo e(route('pembayaran')); ?>">Registrasi</a></li>
                         <li><a href="<?php echo e(route('herregistrasi')); ?>">Herregistrasi</a></li>
+
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript: void(0);" class="waves-effect">
+                        <span class="badge rounded-pill bg-success float-end"
+                            key="t-new"><?php echo app('translator')->get('translation.New'); ?></span>
+                        <i class="bx bx-user-circle"></i>
+                        <span key="t-authentication">Pembayaran</span>
+                    </a>
+                    <ul class="sub-menu" aria-expanded="false">
+                        <li><a href="<?php echo e(url('orders')); ?>">Status Pembayaran</a></li>
 
                     </ul>
                 </li>

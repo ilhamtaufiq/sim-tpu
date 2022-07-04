@@ -78,7 +78,7 @@ class AhliWarisController extends Controller
         $regId = $request->id;
         $rules = [
             'nama' => 'required',
-            'nik' => 'required|numeric|max:16',
+            'nik' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
             'alamat' => 'required',
