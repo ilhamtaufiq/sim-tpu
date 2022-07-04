@@ -21,9 +21,9 @@
                 <div class="card-body">
                     <table class="table table-hover table-condensed">
                         <thead class="thead-light">
-                            <th scope="col">Kode Pembayaran</th>
+                            <th scope="col">Nomor Pembayaran</th>
                             <th>Ahli Waris</th>
-                            <th scope="col">Total Harga</th>
+                            <th scope="col">Nominal</th>
                             <th scope="col">Status Pembayaran</th>
                             <th>Tahun Herregistrasi</th>
                             <th scope="col"></th>

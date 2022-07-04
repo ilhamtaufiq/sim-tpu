@@ -21,7 +21,7 @@
                         <thead class="thead-light">
                             <th scope="col">Kode Pembayaran</th>
                             <th>Ahli Waris</th>
-                            <th scope="col">Total Harga</th>
+                            <th scope="col">Nominal</th>
                             <th scope="col">Status Pembayaran</th>
                             <th>Tahun Herregistrasi</th>
                             <th scope="col"></th>

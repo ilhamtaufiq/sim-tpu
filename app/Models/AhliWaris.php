@@ -17,7 +17,8 @@ class AhliWaris extends Model
         'tanggal_lahir',
         'alamat',
         'agama',
-        'nomor_telepon'
+        'nomor_telepon',
+        'email'
     ];
 
     /**

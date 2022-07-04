@@ -31,7 +31,7 @@
             SIM-TPU
         <?php $__env->endSlot(); ?>
     <?php echo $__env->renderComponent(); ?>
-
+    <?php if(auth()->check() && auth()->user()->hasRole('user')): ?>
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -56,6 +56,7 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
@@ -63,8 +64,9 @@
                         <thead class="thead-light">
                             <th scope="col">#</th>
                             <th>Ahli Waris</th>
-                            <th scope="col">Total Harga</th>
+                            <th scope="col">Nominal</th>
                             <th scope="col">Status Pembayaran</th>
+                            <th scope="col">Tahun Herregistrasi</th>
                             <th scope="col"></th>
                         </thead>
                         <tbody>
@@ -77,13 +79,16 @@
                                     <td><?php echo e(number_format($order->total_price, 2, ',', '.')); ?></td>
                                     <td>
                                         <?php if($order->payment_status == 1): ?>
-                                            Menunggu Pembayaran
+                                            Menunggu Pembayaran / Belum Jatuh Tempo
                                         <?php elseif($order->payment_status == 2): ?>
                                             Sudah Dibayar
                                         <?php else: ?>
                                             Kadaluarsa
                                         <?php endif; ?>
                                     </td>
+                                    <?php $__currentLoopData = $order->registrasi; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <th><?php echo e($tahun = \Carbon\Carbon::parse($item->tanggal_meninggal)->addYear(2)->format('Y')); ?></th>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                     <td>
                                         <a href="<?php echo e(route('orders.show', $order->id)); ?>" class="btn btn-success">
                                             Lihat
@@ -97,6 +102,7 @@
             </div>
         </div>
     </div>
+    <?php endif; ?>
     <!-- end row -->
     <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
     <div class="row">
@@ -203,6 +209,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
     <!-- Saas dashboard init -->
+    <?php if(auth()->check() && auth()->user()->hasRole('admin')): ?>
     <script src="https://www.chartjs.org/dist/2.6.0/Chart.bundle.js"></script>
     <script src="https://www.chartjs.org/samples/2.6.0/utils.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
@@ -317,7 +324,7 @@
             });
         }
     </script>
-
+    <?php endif; ?>
     
     <script></script>
 <?php $__env->stopSection(); ?>

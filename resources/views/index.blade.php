@@ -33,7 +33,7 @@
             SIM-TPU
         @endslot
     @endcomponent
-
+    @role('user')
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -58,15 +58,17 @@
                 </div>
             </div>
         </div>
+
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <table class="table table-hover table-condensed">
                         <thead class="thead-light">
-                            <th scope="col">#</th>
+                            <th scope="col">Nomor Pembayaran</th>
                             <th>Ahli Waris</th>
-                            <th scope="col">Total Harga</th>
+                            <th scope="col">Nominal</th>
                             <th scope="col">Status Pembayaran</th>
+                            <th scope="col">Tahun Herregistrasi</th>
                             <th scope="col"></th>
                         </thead>
                         <tbody>
@@ -79,13 +81,16 @@
                                     <td>{{ number_format($order->total_price, 2, ',', '.') }}</td>
                                     <td>
                                         @if ($order->payment_status == 1)
-                                            Menunggu Pembayaran
+                                            Menunggu Pembayaran / Belum Jatuh Tempo
                                         @elseif ($order->payment_status == 2)
                                             Sudah Dibayar
                                         @else
                                             Kadaluarsa
                                         @endif
                                     </td>
+                                    @foreach ($order->registrasi as $item)
+                                    <th>{{$tahun = \Carbon\Carbon::parse($item->tanggal_meninggal)->addYear(2)->format('Y')}}</th>
+                                    @endforeach
                                     <td>
                                         <a href="{{ route('orders.show', $order->id) }}" class="btn btn-success">
                                             Lihat
@@ -99,6 +104,7 @@
             </div>
         </div>
     </div>
+    @endrole
     <!-- end row -->
     @role('admin')
     <div class="row">
@@ -205,6 +211,7 @@
 @endsection
 @section('script')
     <!-- Saas dashboard init -->
+    @role('admin')
     <script src="https://www.chartjs.org/dist/2.6.0/Chart.bundle.js"></script>
     <script src="https://www.chartjs.org/samples/2.6.0/utils.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.min.js"></script>
@@ -319,7 +326,7 @@
             });
         }
     </script>
-
+    @endrole
     {{-- <script>
         function tahun(tahun) { 
         

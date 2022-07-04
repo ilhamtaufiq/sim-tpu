@@ -41,7 +41,7 @@ class Registrasi extends Model
      */
     public function ahliwaris()
     {
-        return $this->hasOne(AhliWaris::class, 'id', 'id_ahliwaris');
+        return $this->hasOne(AhliWaris::class, 'user_id', 'id_ahliwaris');
     }
 
     /**
@@ -62,6 +62,16 @@ class Registrasi extends Model
     public function order()
     {
         return $this->hasOne(Order::class, 'registrasi_id', 'id');
+    }
+
+    /**
+     * Get the user associated with the Registrasi
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'id_ahliwaris');
     }
     
 }

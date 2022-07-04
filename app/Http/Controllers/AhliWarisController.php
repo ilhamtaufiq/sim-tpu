@@ -81,6 +81,7 @@ class AhliWarisController extends Controller
             'nik' => 'required',
             'tempat_lahir' => 'required',
             'tanggal_lahir' => 'required',
+            'email' => 'required',
             'alamat' => 'required',
             'agama' => 'required',
             'nomor_telepon' => 'required',
@@ -97,6 +98,7 @@ class AhliWarisController extends Controller
             'tempat_lahir' => 'Tempat Lahir',
             'tanggal_lahir' => 'Tanggal Lahir',
             'alamat' => 'Alamat',
+            'email' => 'Alamat Email',
             'agama' => 'Agama',
             'nomor_telepon' => 'Nomor Telepon',      
         );
@@ -185,7 +187,7 @@ class AhliWarisController extends Controller
     public function search(Request $request)
     {
         $aw = AhliWaris::where('nama', 'LIKE', '%'.$request->input('q', '').'%')
-        ->get(['id', 'nama as text']);
+        ->get(['user_id as id', 'nama as text']);
         
         return ['results' => $aw];
     }

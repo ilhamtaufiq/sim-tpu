@@ -38,8 +38,11 @@ class HomeController extends Controller
     }
 
     public function root()
-    {
-        $orders = Order::get();
+    {   
+        $UserId = Auth::id();
+        $registrasi = Registrasi::where('id_ahliwaris', $UserId)->first();
+
+        $orders = Order::where('registrasi_id', $registrasi->id)->get();
         $data = Registrasi::get();
         $jumlah_registrasi = $data->count();
         $now = Carbon::now();
