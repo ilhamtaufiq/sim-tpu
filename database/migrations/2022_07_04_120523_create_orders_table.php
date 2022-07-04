@@ -15,16 +15,10 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('status');
-            $table->string('uname');
-            $table->string('email');
-            $table->string('number');
-            $table->string('transaction_id');
-            $table->string('order_id');
-            $table->string('gross_amount');
-            $table->string('payment_type');
-            $table->string('payment_code')->nullable();
-            $table->string('pdf_url')->nullable();
+            $table->string('number', 16);
+            $table->decimal('total_price', 10, 2);
+            $table->enum('payment_status', ['1', '2', '3', '4'])->comment('1=menunggu pembayaran, 2=sudah dibayar, 3=kadaluarsa, 4=batal');
+            $table->string('snap_token', 36)->nullable();
             $table->timestamps();
         });
     }

@@ -49,6 +49,8 @@ Route::get('/registrasi/input', function () {
 });
 
 Route::get('/pembayaran/invoice', [App\Http\Controllers\InvController::class, 'index'])->name('pembayaran');
+Route::get('/pembayaran/status', [App\Http\Controllers\InvController::class, 'status'])->name('pembayaran.status');
+
 Route::get('/pembayaran/invoice/detail', [App\Http\Controllers\InvController::class, 'show'])->name('pembayaran.show');
 
 Route::get('/pembayaran/herregistrasi', [App\Http\Controllers\HerregistrasiController::class, 'index'])->name('herregistrasi');
@@ -72,6 +74,9 @@ Route::post('/skrd', [App\Http\Controllers\InvController::class, 'store'])->name
 
 // Route::get('/pembayaran', [App\Http\Controllers\OrderController::class, 'index']);
 // Route::get('/payment', [App\Http\Controllers\OrderController::class, 'payment']);
+
+Route::resource('orders', App\Http\Controllers\OrderController::class)->only(['index', 'show']);
+Route::post('payments/midtrans-notification', [App\Http\Controllers\PaymentCallbackController::class, 'receive']);
 
 Route::post('/import', [App\Http\Controllers\RegistrasiController::class, 'import'])->name('import_registrasi');
 Route::get('/export', [App\Http\Controllers\RegistrasiController::class, 'export'])->name('export_registrasi');

@@ -79,6 +79,11 @@ class InvController extends Controller
         //
     }
 
+    public function status()
+    {
+        return view('pages.pembayaran.status');
+    }
+
     /**
      * Remove the specified resource from storage.
      *

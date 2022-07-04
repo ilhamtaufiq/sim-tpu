@@ -5,8 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Herregistrasi;
 use App\Models\Order;
 use Illuminate\Http\Request;
-use Midtrans\Snap;
-use Midtrans\Config;
+
 
 
 
@@ -39,42 +38,9 @@ class HerregistrasiController extends Controller
     public function detail(Request $request)
     {
         $data = Herregistrasi::with('registrasi.ahliwaris')->where('id', $request->id)->first();
-        $bayar = $data->nominal;
-        Config::$serverKey = config('services.midtrans.server_key');
-        Config::$isProduction = config('services.midtrans.is_production');
-        Config::$isSanitized = config('services.midtrans.is_sanitized');
-        Config::$is3ds = config('services.midtrans.is_3ds');
-        
-        $params = array(
-            'transaction_details' => array(
-                'order_id' => rand(),
-                'gross_amount' => $bayar,
-            ),
-            'customer_details' => array(
-                'first_name' => $data->registrasi->ahliwaris->nama,
-                'last_name' => '',
-                'email' => 'ilhamtaufiq@gmail.com',
-                'phone' => '6285217795994',
-            ),
-        );
-        $snap_token = \Midtrans\Snap::getSnapToken($params);
         return view('pages.ahliwaris.retribusi',compact('data','bayar','snap_token'));
     }
-    public function payment_post(Request $request){
-        $json = json_decode($request->get('json'));
-        $order = new Order();
-        $order->status = $json->transaction_status;
-        $order->uname = 'ilham';
-        $order->email = 'ilhamtaufiq@gmail.com';
-        $order->number = '085217795994';
-        $order->transaction_id = $json->transaction_id;
-        $order->order_id = $json->order_id;
-        $order->gross_amount = $json->gross_amount;
-        $order->payment_type = $json->payment_type;
-        $order->payment_code = isset($json->payment_code) ? $json->payment_code : null;
-        $order->pdf_url = isset($json->pdf_url) ? $json->pdf_url : null;
-        return $order->save() ? redirect(url('/'))->with('alert-success', 'Order berhasil dibuat') : redirect(url('/'))->with('alert-failed', 'Terjadi kesalahan');     
-    }
+    
     /**
      * Store a newly created resource in storage.
      *

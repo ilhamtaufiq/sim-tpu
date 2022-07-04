@@ -1,55 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Services\Midtrans\CreateSnapTokenService; // => letakkan pada bagian atas class
 use App\Models\Order;
 use Illuminate\Http\Request;
 
-use Midtrans\Snap;
-use Midtrans\Config;
-
 class OrderController extends Controller
 {
-    public function payment(Request $request){
-        // Set your Merchant Server Key
-        Config::$serverKey = config('services.midtrans.server_key');
-        Config::$isProduction = config('services.midtrans.is_production');
-        Config::$isSanitized = config('services.midtrans.is_sanitized');
-        Config::$is3ds = config('services.midtrans.is_3ds');
-        
-        $params = array(
-            'transaction_details' => array(
-                'order_id' => rand(),
-                'gross_amount' => 18000,
-            ),
-            'customer_details' => array(
-                'first_name' => $request->get('uname'),
-                'last_name' => '',
-                'email' => $request->get('email'),
-                'phone' => $request->get('number'),
-            ),
-        );
-        
-        $snapToken = \Midtrans\Snap::getSnapToken($params);
-
-        return view('pages.pembayaran.payment', ['snap_token'=>$snapToken]);
-    }
-
-    public function payment_post(Request $request){
-        $json = json_decode($request->get('json'));
-        $order = new Order();
-        $order->status = $json->transaction_status;
-        $order->uname = $request->get('uname');
-        $order->email = $request->get('email');
-        $order->number = $request->get('number');
-        $order->transaction_id = $json->transaction_id;
-        $order->order_id = $json->order_id;
-        $order->gross_amount = $json->gross_amount;
-        $order->payment_type = $json->payment_type;
-        $order->payment_code = isset($json->payment_code) ? $json->payment_code : null;
-        $order->pdf_url = isset($json->pdf_url) ? $json->pdf_url : null;
-        return $order->save() ? redirect(url('/pembayaran'))->with('alert-success', 'Order berhasil dibuat') : redirect(url('/pembayaran'))->with('alert-failed', 'Terjadi kesalahan');
-    }
+    
     /**
      * Display a listing of the resource.
      *
@@ -57,8 +15,9 @@ class OrderController extends Controller
      */
     public function index()
     {
-        return view('pages.pembayaran.index');
+        $orders = Order::all();
 
+        return view('orders.index', compact('orders'));
     }
 
     /**
@@ -90,7 +49,18 @@ class OrderController extends Controller
      */
     public function show(Order $order)
     {
-        //
+        $snapToken = $order->snap_token;
+        if (empty($snapToken)) {
+            // Jika snap token masih NULL, buat token snap dan simpan ke database
+ 
+            $midtrans = new CreateSnapTokenService($order);
+            $snapToken = $midtrans->getSnapToken();
+ 
+            $order->snap_token = $snapToken;
+            $order->save();
+        }
+ 
+        return view('orders.show', compact('order', 'snapToken'));
     }
 
     /**
