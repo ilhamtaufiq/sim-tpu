@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Registrasi;
 use App\Models\Inv;
+use App\Models\Order;
+
 use App\Models\Tpu;
 use App\Models\Herregistrasi;
 use Midtrans\Snap;
@@ -113,6 +115,7 @@ class RegistrasiController extends Controller
         $regId = $request->id;
         $kode_tpu = $request->nama_tpu;
         $blok_tpu = $request->blok_makam;
+        $nominal = 40000;
         $string = ['Rp',',00','.'];
         if ($regId == null) {
             $kodeReg = $kode_tpu.'-'.$blok_tpu.rand(00000, 99999);
@@ -170,10 +173,22 @@ class RegistrasiController extends Controller
         ]);  
         $herregistrasi = Herregistrasi::updateOrCreate([
             'registrasi_id' => $registrasi->id,
+            
         ],
         [
-            'nominal' => 40000
+            'nominal' => $nominal
         ]);
+        $order = Order::updateOrCreate([
+            'registrasi_id' => $registrasi->id,
+            'number' => $kodeReg,
+
+        ],
+        [
+            'total_price' => $nominal,
+            'payment_status' => 1,
+
+        ]);
+
 
 
 
