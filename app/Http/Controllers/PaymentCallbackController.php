@@ -19,6 +19,8 @@ class PaymentCallbackController extends Controller
             if ($callback->isSuccess()) {
                 Order::where('id', $order->id)->update([
                     'payment_status' => 2,
+                    'payment_status' => $order,
+
                 ]);
             }
  
