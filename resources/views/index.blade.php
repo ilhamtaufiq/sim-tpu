@@ -72,6 +72,10 @@
                             <th scope="col"></th>
                         </thead>
                         <tbody>
+                            @php
+                                $registrasi = App\Models\Registrasi::where('id_ahliwaris', Auth::user()->id)->first();
+                                $orders = App\Models\Order::where('registrasi_id', $registrasi->id)->get();
+                            @endphp
                             @foreach ($orders as $order)
                                 <tr>
                                     <td>#{{ $order->number }}</td>

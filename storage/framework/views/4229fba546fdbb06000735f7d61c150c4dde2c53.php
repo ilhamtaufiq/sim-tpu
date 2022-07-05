@@ -62,7 +62,7 @@
                 <div class="card-body">
                     <table class="table table-hover table-condensed">
                         <thead class="thead-light">
-                            <th scope="col">#</th>
+                            <th scope="col">Nomor Pembayaran</th>
                             <th>Ahli Waris</th>
                             <th scope="col">Nominal</th>
                             <th scope="col">Status Pembayaran</th>
@@ -70,6 +70,10 @@
                             <th scope="col"></th>
                         </thead>
                         <tbody>
+                            <?php
+                                $registrasi = App\Models\Registrasi::where('id_ahliwaris', Auth::user()->id)->first();
+                                $orders = App\Models\Order::where('registrasi_id', $registrasi->id)->get();
+                            ?>
                             <?php $__currentLoopData = $orders; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $order): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                 <tr>
                                     <td>#<?php echo e($order->number); ?></td>
