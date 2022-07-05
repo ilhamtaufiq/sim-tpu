@@ -297,6 +297,8 @@
                     $('#tempat_lahir').val(res.tempat_lahir);
                     $('#tanggal_lahir').val(res.tanggal_lahir);
                     $('#nomor_telepon').val(res.nomor_telepon);
+                    $('#email').val(res.email);
+
                 }
             });
         }

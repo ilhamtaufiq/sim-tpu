@@ -39,9 +39,7 @@ class HomeController extends Controller
 
     public function root()
     {   
-
-        // $registrasi = Registrasi::where('id_ahliwaris', $UserId)->first();
-        $orders = Order::get();
+    
         $data = Registrasi::get();
         $jumlah_registrasi = $data->count();
         $now = Carbon::now();
@@ -62,7 +60,7 @@ class HomeController extends Controller
         //Persentase kenaikan (%) = (( akhir-awal ))/awal x 100%
         $perbandingan = $tahun-$subTahun;
         $persentase  = divnum($perbandingan, $subTahun)*100;
-        return view('index',compact('jumlah_registrasi','tahun','data','subTahun','persentase','bulan','label_bulan','orders'));
+        return view('index',compact('jumlah_registrasi','tahun','data','subTahun','persentase','bulan','label_bulan'));
     }
 
     /*Language Translation*/

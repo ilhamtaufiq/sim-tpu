@@ -115,6 +115,9 @@ class AhliWarisController extends Controller
             'created_at' => now(),
         ]);
 
+        $user->assignRole([4]);
+
+
         $ahliWaris = AhliWaris::updateOrCreate(
             [
                 'id' => $regId,
