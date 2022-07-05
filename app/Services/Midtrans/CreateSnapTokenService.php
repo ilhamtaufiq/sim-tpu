@@ -19,21 +19,19 @@ class CreateSnapTokenService extends Midtrans
     public function getSnapToken()
     {   
         $id = $this->order->id;  
-        $data = Order::with('registrasi.ahliwaris')->where('id', $id)->first();
-        foreach ($data->registrasi as $value) {
-            # code...
-            $params = [
-                'transaction_details' => [
-                    'order_id' => $this->order->number,
-                    'gross_amount' => $this->order->total_price,
-                ],
-                'custom_field1' => [
-                    'first_name' => $value->ahliwaris->nama,
-                    'email' => $value->ahliwaris->email,
-                    'phone' => $value->ahliwaris->no_telepon,
-                ]
-            ];
-        }        
+        $data = Order::with('registrasi.ahliwaris')->where('id', $id)->get();
+        
+        $params = [
+            'transaction_details' => [
+                'order_id' => $this->order->number,
+                'gross_amount' => $this->order->total_price,
+            ],
+            'customer_details' => [
+                'first_name' => $data->registrasi->ahliwaris->nama,
+                'email' => 'ilhamtaufiq@gmail.com',
+                'phone' => '085217795994',
+            ]
+        ];
  
         $snapToken = Snap::getSnapToken($params);
  
